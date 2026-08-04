@@ -8,7 +8,8 @@ from datetime import datetime, timedelta
 import random
 import string
 from repositories.base import BaseRepository
-from models.user import User
+from models import User
+from repositories.base import BaseRepository
 
 class UserRepository(BaseRepository[User]):
     def __init__(self, session: AsyncSession):
