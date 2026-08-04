@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: leakbot
+      POSTGRES_USER: leakbot
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-leakbot123}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U leakbot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  bot:
+    build: .
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
+      DATABASE_URL: postgresql://leakbot:${DB_PASSWORD:-leakbot123}@postgres:5432/leakbot
+      REDIS_URL: redis://redis:6379/0
+      ADMIN_IDS: ${ADMIN_IDS}
+      UPI_ID: ${UPI_ID:-9866583926@axl}
+      PREMIUM_PRICE: ${PREMIUM_PRICE:-100}
+      ENTERPRISE_PRICE: ${ENTERPRISE_PRICE:-500}
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_started }
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
