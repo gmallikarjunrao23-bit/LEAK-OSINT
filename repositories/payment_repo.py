@@ -2,6 +2,7 @@
 Payment repository
 """
 
+from models import Payment
 from typing import Optional, List
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, desc, func
