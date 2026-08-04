@@ -3,6 +3,7 @@ Query repository
 """
 
 from typing import List
+from models import Query
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, desc, func
 from datetime import datetime, timedelta
