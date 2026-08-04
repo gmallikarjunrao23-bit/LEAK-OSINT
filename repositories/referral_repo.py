@@ -3,6 +3,7 @@ Referral repository
 """
 
 from typing import Optional
+from models import Referral
 from sqlalchemy.ext.asyncio import AsyncSession
 from repositories.base import BaseRepository
 from models.referral import Referral
