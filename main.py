@@ -25,7 +25,7 @@ class LeakBot:
         
         self.app = Application.builder().token(self.token).build()
         
-        self.app.update_persist(LoggingMiddleware())
+        self.app.update_persistence(LoggingMiddleware())
         self.app.update_persist(ThrottleMiddleware())
         
         self._register_handlers()
