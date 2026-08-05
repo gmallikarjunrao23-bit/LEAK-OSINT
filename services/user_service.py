@@ -2,6 +2,7 @@
 User service
 """
 
+from models.user import User
 from typing import Optional, Tuple
 from datetime import datetime
 from sqlalchemy.ext.asyncio import AsyncSession
