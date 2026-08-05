@@ -2,6 +2,7 @@
 Payment service — UPI with admin approval
 """
 
+from models.payment import Payment
 from typing import Optional, List, Dict, Any
 from datetime import datetime
 from sqlalchemy.ext.asyncio import AsyncSession
