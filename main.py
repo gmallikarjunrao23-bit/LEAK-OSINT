@@ -69,7 +69,7 @@ class LeakBot:
         self.app.run_polling()
 
 if __name__ == "__main__":
-    init_db()
+    await init_db()
     bot = LeakBot()
     bot.build()
     bot.run()
