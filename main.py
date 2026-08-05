@@ -2,6 +2,7 @@
 LeakOSINT Pro — Main Entry Point
 """
 
+import asyncio
 import logging
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters
 from config.settings import settings
@@ -69,7 +70,7 @@ class LeakBot:
         self.app.run_polling()
 
 if __name__ == "__main__":
-    await init_db()
+    asyncio.run(init_db())
     bot = LeakBot()
     bot.build()
     bot.run()
